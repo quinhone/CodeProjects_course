@@ -26,7 +26,7 @@ class ProjectMemberController extends Controller
      */
     public function index()
     {
-        return $this->repository->with(['members'])->findWhere(['user_id' => \Authorizer::getResourceOwnerId()])->all();
+        return $this->repository->with(['members'])->findWhere(['user_id' => \Authorizer::getResourceOwnerId()]);
     }
 
     /**
