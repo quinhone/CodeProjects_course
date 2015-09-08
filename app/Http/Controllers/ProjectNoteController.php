@@ -48,7 +48,7 @@ class ProjectNoteController extends Controller
      */
     public function show($id, $noteId)
     {
-        return $this->repository->with(['project'])->findWhere(['project_id'=>$id, 'id' => $noteId]);
+        return $this->repository->findWhere(['project_id'=>$id, 'id' => $noteId]);
     }
 
     /**
@@ -69,9 +69,9 @@ class ProjectNoteController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $idNote)
     {
-        $this->service->update($request->all());
+        $this->service->update($request->all(), $idNote);
     }
 
     /**
