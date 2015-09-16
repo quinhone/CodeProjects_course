@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use CodeProject\Http\Requests;
 use CodeProject\Http\Controllers\Controller;
+use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class UserController extends Controller
 {
@@ -18,6 +19,12 @@ class UserController extends Controller
     {
         $this->repository = $repository;
         $this->service = $service;
+    }
+
+    public function authenticated()
+    {
+        $userId = Authorizer::getResourceOwnerId();
+        return $this->repository->find($userId);
     }
     /**
      * Display a listing of the resource.
@@ -48,7 +55,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return $this->repository->with(['projects'])->find();
+        return $this->repository->with(['projects'])->find($id);
     }
 
     /**

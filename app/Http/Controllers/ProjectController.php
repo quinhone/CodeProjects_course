@@ -27,6 +27,7 @@ class ProjectController extends Controller
     public function index()
     {
         return $this->repository->findWhere(['user_id' => \Authorizer::getResourceOwnerId()]);
+        //return $this->repository->skipPresenter()->with('client')->findWhere(['user_id' => \Authorizer::getResourceOwnerId()]);
     }
 
     /**

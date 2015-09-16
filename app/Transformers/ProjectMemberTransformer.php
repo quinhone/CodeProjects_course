@@ -4,7 +4,6 @@ namespace CodeProject\Transformers;
 
 use CodeProject\Entities\User;
 use League\Fractal\TransformerAbstract;
-use CodeProject\Entities\ProjectMember;
 
 /**
  * Class ProjectMemberTransformer

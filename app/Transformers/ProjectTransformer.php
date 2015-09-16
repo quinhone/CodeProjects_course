@@ -12,7 +12,10 @@ use CodeProject\Entities\Project;
 class ProjectTransformer extends TransformerAbstract
 {
 
-    protected $defaultIncludes = ['members'];
+    protected $defaultIncludes = [
+            'members',
+            'client'
+    ];
 
     /**
      * Transform the \ProjectTransformer entity
@@ -24,7 +27,8 @@ class ProjectTransformer extends TransformerAbstract
     {
         return [
             'project_id'   => (int)$project->id,
-            'project'        => $project->name,
+            'client_id' => (int)$project->client_id,
+            'name'        => $project->name,
             'description' => $project->description,
             'progress'  => $project->progress,
             'status' => $project->status,
@@ -35,5 +39,11 @@ class ProjectTransformer extends TransformerAbstract
     public  function includeMembers(Project $project)
     {
         return $this->collection($project->members, new ProjectMemberTransformer());
+
+    }
+
+    public  function includeClient(Project $project)
+    {
+        return $this->collection($project->client, new ClientTransformer());
     }
 }

@@ -18,7 +18,7 @@ class Project extends Model
 
     public function client()
     {
-        return $this->belongsTo('CodeProject\Entities\Client');
+        return $this->belongsTo(Client::class);
     }
 
     public function user()
