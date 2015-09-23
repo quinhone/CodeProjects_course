@@ -27,7 +27,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return  $this->repository->with(['projects'])->all();
+        return  $this->repository->all();
     }
 
     /**

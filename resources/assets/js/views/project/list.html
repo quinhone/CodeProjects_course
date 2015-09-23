@@ -21,10 +21,11 @@
                                 <td>{{obj.client.data.name}}</td>
                                 <td>{{obj.progress}}</td>
                                 <td>{{obj.status}}</td>
-                                <td>{{obj.due_date}}</td>
+                                <td>{{obj.due_date | dateBr}}</td>
                                 <td>
                                     <a ng-href="#/projects/{{obj.id}}/edit" class="btn btn-primary">Edit</a>
-                                    <a ng-href="#/projects/{{obj.id}}remove" class="btn btn-danger">Delete</a>
+                                    <a ng-href="#/project/{{obj.id}}/notes" class="btn btn-success">Notes</a>
+                                    <a ng-href="#/projects/{{obj.id}}/remove" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                         </tbody>

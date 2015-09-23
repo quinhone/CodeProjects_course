@@ -27,7 +27,6 @@ class ProjectController extends Controller
     public function index()
     {
         return $this->repository->findWhere(['user_id' => \Authorizer::getResourceOwnerId()]);
-        //return $this->repository->skipPresenter()->with('client')->findWhere(['user_id' => \Authorizer::getResourceOwnerId()]);
     }
 
     /**
@@ -81,7 +80,7 @@ class ProjectController extends Controller
         {
             return ['error' => 'Access Forbidden'];
         }
-        $this->service->update($request->all(), $id);
+       return  $this->service->update($request->all(), $id);
     }
 
     /**

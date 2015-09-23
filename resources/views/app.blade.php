@@ -41,7 +41,20 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="/">Home</a></li>
-					<li><a href="/#/clients">Clients</a></li>
+					<li class="dropdown">
+						<a href="/#/clients" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Clients <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="/#/clients">Clients</a></li>
+							<li><a href="/#/clients/new">Client New</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="/#/projects" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="/#/projects">Projects</a></li>
+							<li><a href="/#/projects/new">Project New</a></li>
+						</ul>
+					</li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -72,7 +85,7 @@
 		<script src="{{asset('build/js/vendor/angular-animate.min.js')}}"></script>
 		<script src="{{asset('build/js/vendor/angular-messages.min.js')}}"></script>
 		<script src="{{asset('build/js/vendor/ui-bootstrap.min.js')}}"></script>
-		<script src="{{asset('build/js/vendor/navbar.min.js')}}"></script>
+		<script src="{{asset('build/js/vendor/bootstrap.min.js')}}"></script>
 		<script src="{{asset('build/js/vendor/angular-cookies.min.js')}}"></script>
 		<script src="{{asset('build/js/vendor/query-string.js')}}"></script>
 		<script src="{{asset('build/js/vendor/angular-oauth2.min.js')}}"></script>
@@ -100,6 +113,9 @@
 		<script src="{{asset('build/js/controllers/project-note/projectNoteNew.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-note/projectNoteEdit.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-note/projectNoteRemove.js')}}"></script>
+
+		<!-- FILTERS !-->
+		<script src="{{asset('build/js/filters/dateBr.js')}}"></script>
 
 		<!-- SERVICES !-->
 		<script src="{{asset('build/js/services/client.js')}}"></script>
