@@ -20,6 +20,7 @@ app.provider('appConfig', ['$httpParamSerializerProvider', function($httpParamSe
                 {
                     return $httpParamSerializerProvider.$get()(data);
                 }
+                return data;
             },
             transformResponse: function(data, headers){
                 var headersGetter = headers();
