@@ -4,6 +4,7 @@
     <file url="file://$PROJECT_DIR$/resources/assets/js/app.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/assets/js/controllers/login.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/assets/js/views/login.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/assets/js/views/project/edit.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/assets/js/views/project/new.html" charset="UTF-8" />
   </component>
 </project>
