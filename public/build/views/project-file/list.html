@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Project File List</div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="20%">Name</th>
+                                <th width="60%">Description</th>
+                                <th width="20%">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in projectFiles">
+                                <td>{{obj.name}}</td>
+                                <td>{{obj.description | limitTo:100}}...</td>
+                                <td>
+                                    <project-file-download id-file="{{obj.id}}"></project-file-download>
+                                    <a ng-href="#/project/{{obj.project_id}}/file/{{obj.id}}/edit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <a ng-href="#/project/{{obj.project_id}}/file/{{obj.id}}/remove" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

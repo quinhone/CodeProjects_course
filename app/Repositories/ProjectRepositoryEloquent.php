@@ -17,6 +17,12 @@ use Prettus\Repository\Eloquent\BaseRepository;
 class ProjectRepositoryEloquent extends BaseRepository implements ProjectRepositoryInterface
 {
     /**
+     * @var array
+     */
+    protected $fieldSearchable = [
+            'name'
+    ];
+    /**
      * Specify Model class name
      *
      * @return string
@@ -31,7 +37,7 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
      */
     public function boot()
     {
-        $this->pushCriteria( app(RequestCriteria::class) );
+        return $this->pushCriteria( app(RequestCriteria::class) );
     }
 
     public function isOwner($projectid, $userid)

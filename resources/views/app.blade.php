@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app"">
+<html lang="en" ng-app="app">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,7 +24,9 @@
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
+
 </head>
+
 <body>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -89,6 +91,7 @@
 		<script src="{{asset('build/js/vendor/angular-cookies.min.js')}}"></script>
 		<script src="{{asset('build/js/vendor/query-string.js')}}"></script>
 		<script src="{{asset('build/js/vendor/angular-oauth2.min.js')}}"></script>
+		<script src="{{asset('build/js/vendor/ng-file-upload.min.js')}}"></script>
 
 		<script src="{{asset('build/js/app.js')}}"></script>
 
@@ -114,17 +117,29 @@
 		<script src="{{asset('build/js/controllers/project-note/projectNoteEdit.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-note/projectNoteRemove.js')}}"></script>
 
+		<script src="{{asset('build/js/controllers/project-file/projectFileList.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-file/projectFileNew.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-file/projectFileEdit.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-file/projectFileRemove.js')}}"></script>
+
 		<!-- FILTERS !-->
 		<script src="{{asset('build/js/filters/dateBr.js')}}"></script>
+
+		<!-- DIRECTVES !-->
+		<script src="{{asset('build/js/directives/projectFileDownload.js')}}"></script>
 
 		<!-- SERVICES !-->
 		<script src="{{asset('build/js/services/client.js')}}"></script>
 		<script src="{{asset('build/js/services/project.js')}}"></script>
 		<script src="{{asset('build/js/services/projectNote.js')}}"></script>
+		<script src="{{asset('build/js/services/projectFile.js')}}"></script>
 		<script src="{{asset('build/js/services/user.js')}}"></script>
+		<script src="{{asset('build/js/services/url.js')}}"></script>
+
 
 	@else
 		<script src="{{ elixir('js/all.js') }}"></script>
 	@endif
+
 </body>
 </html>

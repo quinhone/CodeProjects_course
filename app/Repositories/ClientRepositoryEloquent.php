@@ -16,6 +16,10 @@ use Prettus\Repository\Eloquent\BaseRepository;
 
 class ClientRepositoryEloquent extends BaseRepository implements ClientRepositoryInterface
 {
+    protected $fieldSearchable = [
+            'name'
+    ];
+
     public function model()
     {
         return Client::class;

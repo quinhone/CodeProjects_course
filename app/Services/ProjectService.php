@@ -8,15 +8,10 @@
 
 namespace CodeProject\Services;
 
-
-use CodeProject\Repositories\ProjectFileRepositoryInterface;
 use CodeProject\Repositories\ProjectRepositoryInterface;
-use CodeProject\Validators\ProjectFileValidator;
 use CodeProject\Validators\ProjectValidator;
 use Prettus\Validator\Exceptions\ValidatorException;
 
-use Illuminate\Contracts\Filesystem\Factory as Storage;
-use Illuminate\Filesystem\Filesystem;
 
 class ProjectService
 {
@@ -25,36 +20,13 @@ class ProjectService
      */
     protected $repository;
 
-    /**
-     * @var ProjectFileRepositoryInterface
-     */
-    protected $filerepository;
-    /**
-     * @var ProjectValidator
-     */
     protected $validator;
-    /**
-     * @var ProjectFileValidator
-     */
-    protected $filevalidator;
-    /**
-     * @var Filesystem
-     */
-    protected $filesystem;
 
-    /**
-     * @var Storage;
-     */
-    protected $storage;
 
-    public function __construct(ProjectRepositoryInterface $repository, ProjectFileRepositoryInterface $filerepository, ProjectValidator $validator, ProjectFileValidator $filevalidator, Filesystem $filesystem, Storage $storage)
+    public function __construct(ProjectRepositoryInterface $repository, ProjectValidator $validator)
     {
         $this->repository = $repository;
         $this->validator = $validator;
-        $this->filesystem = $filesystem;
-        $this->storage = $storage;
-        $this->filevalidator = $filevalidator;
-        $this->filerepository = $filerepository;
     }
 
     public function create(array $data)
@@ -146,64 +118,27 @@ class ProjectService
         return false;
     }
 
-    public function createFile(array $data)
+    public function checkProjectOwner($projectId)
     {
-        try{
+        $userid = \Authorizer::getResourceOwnerId();
+        return $this->repository->isOwner($projectId, $userid);
 
-           $this->filevalidator->with($data)->passesOrFail();
+    }
 
-            $project = $this->repository->skipPresenter()->find($data['project_id']);
-            $projectFile = $project->files()->create($data);
+    public function checkProjectMember($projectId)
+    {
+        $userid = \Authorizer::getResourceOwnerId();
+        return $this->repository->hasMember($projectId, $userid);
 
-            $this->storage->disk('local_public')->put($projectFile->id.'.'.$data['extension'], $this->filesystem->get($data['file']));
+    }
 
-            return [
-                'error' => false,
-                'success' =>  true
-            ];
-
-        }
-        catch(ValidatorException $e)
+    public function checkProjectPermissions($projectId)
+    {
+        if($this->checkProjectOwner($projectId) || $this->checkProjectMember($projectId))
         {
-            return [
-                'error' => true,
-                'message' => $e->getMessageBag()
-            ];
+            return true;
         }
-
-    }
-
-    public function removeFile($id)
-    {
-        try{
-            $projectfile = $this->getProjectFile($id);
-
-            if( $projectfile['success'] )
-            {
-                if(file_exists(public_path().'/uploads/'.$id.'.'.$projectfile['success']->extension))
-                {
-                    $this->storage->disk('local_public')->delete($id.'.'.$projectfile['success']->extension);
-                }
-                return ["success" => $this->filerepository->delete($id)];
-            }
-
-            return $projectfile;
-
-        }catch (\Exception $e) {
-            return [
-                'success' => false,
-                'message' => "Could not delete the File {$id}"
-            ];
-        }
-    }
-
-    public function getProjectFile($id)
-    {
-        try{
-            return ["success" => $this->filerepository->find($id)];
-        } catch(\Exception $e) {
-            return ["success" => false, "message" => "File ID: {$id} not found"];
-        }
+        return false;
     }
 
 }

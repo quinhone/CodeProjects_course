@@ -11,7 +11,7 @@
                             <label class="col-md-4 control-label">Clients</label>
                             <div class="col-md-6">
                                 <input class="form-control" type="text" name="client_id" ng-model="clientSelected"
-                                       typeahead="obj as obj.name for obj in getClients($viewValue)|limitTo:10"
+                                       typeahead="obj as obj.name for obj in getClients($viewValue)|limitTo:5"
                                        typeahead-input-formatter="formatName($model)"
                                        typeahead-on-select="selectClient($item)"
                                        typeahead-editable="false" required/>
