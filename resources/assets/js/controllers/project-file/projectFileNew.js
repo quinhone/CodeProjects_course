@@ -8,6 +8,7 @@ angular.module('app.controllers')
                         id: $routeParams.id,
                         idFile: ''
                     });
+
                 Upload.upload({
                     url: url,
                     fields: {
@@ -17,6 +18,7 @@ angular.module('app.controllers')
                     },
                     file: $scope.projectFile.file
                 }).then(function (data, status, headers, config) {
+                    console.log(url);
                     $location.path('/project/'+$routeParams.id+'/files');
                 });
             }

@@ -17,7 +17,7 @@
                                 <td>{{obj.name}}</td>
                                 <td>{{obj.description | limitTo:100}}...</td>
                                 <td>
-                                    <project-file-download id-file="{{obj.id}}"></project-file-download>
+                                    <project-file-download id-project="{{obj.project_id}}" id-file="{{obj.id}}"></project-file-download>
                                     <a ng-href="#/project/{{obj.project_id}}/file/{{obj.id}}/edit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
                                     <a ng-href="#/project/{{obj.project_id}}/file/{{obj.id}}/remove" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
                                 </td>

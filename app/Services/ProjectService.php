@@ -118,7 +118,7 @@ class ProjectService
         return false;
     }
 
-    public function checkProjectOwner($projectId)
+    /*public function checkProjectOwner($projectId)
     {
         $userid = \Authorizer::getResourceOwnerId();
         return $this->repository->isOwner($projectId, $userid);
@@ -128,6 +128,31 @@ class ProjectService
     public function checkProjectMember($projectId)
     {
         $userid = \Authorizer::getResourceOwnerId();
+        return $this->repository->hasMember($projectId, $userid);
+
+    }
+
+    public function checkProjectPermissions($projectId)
+    {
+        if($this->checkProjectOwner($projectId) || $this->checkProjectMember($projectId))
+        {
+            return true;
+        }
+        return false;
+    }*/
+
+    public function checkProjectOwner($projectId)
+    {
+        $userid = \Authorizer::getResourceOwnerId();
+
+        return $this->repository->isOwner($projectId, $userid);
+
+    }
+
+    public function checkProjectMember($projectId)
+    {
+        $userid = \Authorizer::getResourceOwnerId();
+
         return $this->repository->hasMember($projectId, $userid);
 
     }

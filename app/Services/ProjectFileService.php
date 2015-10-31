@@ -121,7 +121,7 @@ class ProjectFileService
             $project = $this->projectRepository->skipPresenter()->find($data['project_id']);
             $projectFile = $project->files()->create($data);
 
-            $this->storage->disk('local_public')->put($projectFile->getFileName(), $this->filesystem->get($data['file']));
+            $this->storage->disk('local')->put($projectFile->getFileName(), $this->filesystem->get($data['file']));
 
             return [
                 'error' => false,
@@ -148,7 +148,7 @@ class ProjectFileService
             {
                 if(file_exists(public_path().'/uploads/'.$id.'.'.$projectfile['success']->extension))
                 {
-                    $this->storage->disk('local_public')->delete($id.'.'.$projectfile['success']->extension);
+                    $this->storage->disk('local')->delete($id.'.'.$projectfile['success']->extension);
                 }
                 return ["success" => $this->repository->delete($id)];
             }
@@ -181,7 +181,7 @@ class ProjectFileService
         {
             case 'local':
                 return $this->storage->getDriver()->getAdapter()->getPathPrefix()
-                .'/'.$projectFile->getFileName();
+                .$projectFile->getFileName();
         }
     }
 
@@ -194,7 +194,7 @@ class ProjectFileService
         }
     }
 
-    public function checkProjectOwner($projectFileId)
+    /*public function checkProjectOwner($projectFileId)
     {
         $userid = \Authorizer::getResourceOwnerId();
         $projectId = $this->repository->skipPresenter()->find($projectFileId)->project_id;
@@ -219,6 +219,6 @@ class ProjectFileService
             return true;
         }
         return false;
-    }
+    }*/
 
 }

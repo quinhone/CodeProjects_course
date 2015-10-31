@@ -32,7 +32,8 @@ class ProjectTransformer extends TransformerAbstract
             'description' => $project->description,
             'progress'  => (int) $project->progress,
             'status' => $project->status,
-            'due_date' => $project->due_date
+            'due_date' => $project->due_date,
+            'is_member' => $project->user_id != \Authorizer::getResourceOwnerId()
         ];
     }
 

@@ -4,6 +4,7 @@ namespace CodeProject\Http\Controllers;
 
 use CodeProject\Repositories\ProjectFileRepositoryInterface;
 use CodeProject\Services\ProjectFileService;
+use CodeProject\Services\ProjectService;
 use Illuminate\Http\Request;
 
 use CodeProject\Http\Requests;
@@ -14,11 +15,13 @@ class ProjectFileController extends Controller
 
     private $repository;
     private $service;
+    private $projectService;
 
-    public function __construct(ProjectFileRepositoryInterface $repository, ProjectFileService $service)
+    public function __construct(ProjectFileRepositoryInterface $repository, ProjectFileService $service, ProjectService $projectService)
     {
         $this->repository = $repository;
         $this->service = $service;
+        $this->projectService = $projectService;
     }
     /**
      * Display a listing of the resource.
@@ -98,20 +101,20 @@ class ProjectFileController extends Controller
 
     }
 
-    public function showFile($id)
+    public function showFile($id, $fileId)
     {
-        if($this->service->checkProjectPermissions($id) == false)
+        if($this->projectService->checkProjectPermissions($id) == false)
         {
             return ['error' => 'Access Forbidden'];
         }
 
-        $filePath = $this->service->getFilePath($id);
+        $filePath = $this->service->getFilePath($fileId);
         $fileContent = file_get_contents($filePath);
         $file64 = base64_encode($fileContent);
         return [
             'file' => $file64,
             'size' => filesize($filePath),
-            'name' => $this->service->getFileName($id)
+            'name' => $this->service->getFileName($fileId)
         ];
     }
 
@@ -121,13 +124,14 @@ class ProjectFileController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show($id, $fileId)
     {
-        if($this->service->checkProjectPermissions($id) == false)
+
+        if($this->projectService->checkProjectPermissions($id) == false)
         {
             return ['error' => 'Access Forbidden'];
         }
-        return $this->repository->find($id);
+        return $this->repository->find($fileId);
     }
 
     /**
@@ -148,13 +152,13 @@ class ProjectFileController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $fileId)
     {
-        if($this->service->checkProjectPermissions($id) == false)
+        if($this->projectService->checkProjectPermissions($id) == false)
         {
             return ['error' => 'Access Forbidden'];
         }
-        return $this->service->update($request->all(), $id);
+        return $this->service->update($request->all(), $fileId);
     }
 
     /**
@@ -163,12 +167,12 @@ class ProjectFileController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id, $fileId)
     {
-        if($this->service->checkProjectPermissions($id) == false)
+        if($this->projectService->checkProjectPermissions($id) == false)
         {
             return ['error' => 'Access Forbidden'];
         }
-        return $this->service->removeFile($id);
+        return $this->service->removeFile($fileId);
     }
 }
