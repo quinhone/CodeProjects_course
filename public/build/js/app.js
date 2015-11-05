@@ -15,6 +15,12 @@ app.provider('appConfig', ['$httpParamSerializerProvider', function($httpParamSe
                 {value: 3, label: 'Concluído'}
             ]
         },
+        projectTask:{
+            status:[
+                {value: 1, label: 'Imcompleta'},
+                {value: 2, label: 'Completa'}
+            ]
+        },
         urls: {
             projectFile: '/project/{{id}}/file/{{idFile}}'
         },
@@ -70,19 +76,19 @@ app.config(['$routeProvider', '$httpProvider',  'OAuthProvider', 'OAuthTokenProv
             templateUrl: 'build/views/client/list.html',
             controller: 'ClientListController'
         })
-        .when('/clients/new', {
+        .when('/client/new', {
             templateUrl: 'build/views/client/new.html',
             controller: 'ClientNewController'
         })
-        .when('/clients/:id/edit', {
+        .when('/client/:id/edit', {
             templateUrl: 'build/views/client/edit.html',
             controller: 'ClientEditController'
         })
-        .when('/clients/:id/remove', {
+        .when('/client/:id/remove', {
             templateUrl: 'build/views/client/remove.html',
             controller: 'ClientRemoveController'
         })
-        .when('/clients/:id/detail', {
+        .when('/client/:id/detail', {
             templateUrl: 'build/views/client/detail.html',
             controller: 'ClientDetailController'
         })
@@ -90,15 +96,15 @@ app.config(['$routeProvider', '$httpProvider',  'OAuthProvider', 'OAuthTokenProv
             templateUrl: 'build/views/project/list.html',
             controller: 'ProjectListController'
         })
-        .when('/projects/new', {
+        .when('/project/new', {
             templateUrl: 'build/views/project/new.html',
             controller: 'ProjectNewController'
         })
-        .when('/projects/:id/edit', {
+        .when('/project/:id/edit', {
             templateUrl: 'build/views/project/edit.html',
             controller: 'ProjectEditController'
         })
-        .when('/projects/:id/remove', {
+        .when('/project/:id/remove', {
             templateUrl: 'build/views/project/remove.html',
             controller: 'ProjectRemoveController'
         })
@@ -122,6 +128,26 @@ app.config(['$routeProvider', '$httpProvider',  'OAuthProvider', 'OAuthTokenProv
             templateUrl: 'build/views/project-note/remove.html',
             controller: 'ProjectNoteRemoveController'
         })
+        .when('/project/:id/tasks', {
+            templateUrl: 'build/views/project-task/list.html',
+            controller: 'ProjectTaskListController'
+        })
+        .when('/project/:id/task/:idTask/show', {
+            templateUrl: 'build/views/project-task/show.html',
+            controller: 'ProjectTaskShowController'
+        })
+        .when('/project/:id/task/new', {
+            templateUrl: 'build/views/project-task/new.html',
+            controller: 'ProjectTaskNewController'
+        })
+        .when('/project/:id/task/:idTask/edit', {
+            templateUrl: 'build/views/project-task/edit.html',
+            controller: 'ProjectTaskEditController'
+        })
+        .when('/project/:id/task/:idTask/remove', {
+            templateUrl: 'build/views/project-task/remove.html',
+            controller: 'ProjectTaskRemoveController'
+        })
         .when('/project/:id/files', {
             templateUrl: 'build/views/project-file/list.html',
             controller: 'ProjectFileListController'
@@ -137,6 +163,14 @@ app.config(['$routeProvider', '$httpProvider',  'OAuthProvider', 'OAuthTokenProv
         .when('/project/:id/file/:idFile/remove', {
             templateUrl: 'build/views/project-file/remove.html',
             controller: 'ProjectFileRemoveController'
+        })
+        .when('/project/:id/members', {
+            templateUrl: 'build/views/project-member/list.html',
+            controller: 'ProjectMemberListController'
+        })
+        .when('/project/:id/member/:idPrejectMember/remove', {
+            templateUrl: 'build/views/project-member/remove.html',
+            controller: 'ProjectMemberRemoveController'
         });
 
 

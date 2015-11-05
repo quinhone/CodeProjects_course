@@ -2,7 +2,8 @@
 
 namespace CodeProject\Http\Controllers;
 
-use CodeProject\Repositories\ProjectRepositoryInterface;
+use CodeProject\Repositories\ProjectMemberRepositoryInterface;
+use CodeProject\Services\ProjectMemberService;
 use Illuminate\Http\Request;
 
 use CodeProject\Http\Requests;
@@ -14,19 +15,21 @@ class ProjectMemberController extends Controller
     private $repository;
     private $service;
 
-    public function __construct(ProjectRepositoryInterface $repository)
+    public function __construct(ProjectMemberRepositoryInterface $repository, ProjectMemberService $service)
     {
         $this->repository = $repository;
-       // $this->service = $service;
+        $this->service = $service;
+        $this->middleware('check-project-owner', ['except' => ['show', 'index']]);
+        $this->middleware('check-project-permission', ['except' => ['store', 'destroy']]);
     }
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index()
+    public function index($id)
     {
-        return $this->repository->with(['members'])->findWhere(['user_id' => \Authorizer::getResourceOwnerId()]);
+        return $this->repository->findWhere(['project_id' => $id]);
     }
 
     /**
@@ -45,9 +48,11 @@ class ProjectMemberController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $data['project_id'] = $id;
+        return $this->service->create($data);
     }
 
     /**
@@ -56,9 +61,9 @@ class ProjectMemberController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show($id, $idProjectMember)
     {
-        //
+        $this->repository->find($idProjectMember);
     }
 
     /**
@@ -90,8 +95,8 @@ class ProjectMemberController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id, $idProjectMember)
     {
-        //
+        $this->service->delete($idProjectMember);
     }
 }

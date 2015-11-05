@@ -1,0 +1,46 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="text-center">Project Member List</h3>
+
+                    <div class="col-md-12">
+                        <form class="form-inline" role="form" name="form" method="POST" ng-submit="save()">
+                            <div class="form-group">
+                                <label class="control-label">Name</label>
+                                <input type="text" class="form-control" name="member_id"
+                                       ng-model="userSelected"
+                                       typeahead="obj as obj.name for obj in getUsers($viewValue)|limitTo:5"
+                                       typeahead-input-formatter="formatName($model)"
+                                       typeahead-on-select="selectUser($item)"
+                                       typeahead-editable="false" required/>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+
+                        </form>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th width="80%">Name</th>
+                            <th width="20%">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in projectMembers">
+                            <td>{{obj.user.data.name}}</td>
+                            <td>
+                                <a ng-href="#/project/{{obj.project_id}}/member/{{obj.user.data.member_id}}/remove" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -17,6 +17,7 @@ angular.module('app.controllers')
         }
 
         $scope.save = function(){
+            console.log($scope.project);
             if($scope.form.$valid)
             {
                 $scope.project.user_id = $cookies.getObject('user').id;

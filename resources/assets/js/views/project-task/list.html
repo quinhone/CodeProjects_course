@@ -1,0 +1,48 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="text-center">Project Task List</h3>
+
+                    <div class="col-md-12">
+                        <form class="form-inline" role="form" name="form" method="POST" ng-submit="save()">
+                            <div class="form-group">
+                                <label class="control-label">Name</label>
+                                <input type="text" class="form-control" name="name" ng-model="projectTask.name" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+
+                        </form>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th width="50%">Name</th>
+                            <th width="10%">Start Date</th>
+                            <th width="10%">Due Date</th>
+                            <th width="10%">Status</th>
+                            <th width="20%">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="obj in projectTasks">
+                            <td>{{obj.name}}</td>
+                            <td>{{obj.start_date | dateBr}}</td>
+                            <td>{{obj.due_date | dateBr}}</td>
+                            <td>{{obj.status}}</td>
+                            <td>
+                                <a ng-href="#/project/{{obj.project_id}}/task/{{obj.id}}/edit" class="btn btn-primary">Edit</a>
+                                <a ng-href="#/project/{{obj.project_id}}/task/{{obj.id}}/remove" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

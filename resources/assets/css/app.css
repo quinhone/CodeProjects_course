@@ -5890,6 +5890,8 @@ only screen and (min-device-pixel-ratio : 1.5) {
 }
 
 
-
+.form-inline .control-label {
+  padding-top: 8px;
+}
 
 /*# sourceMappingURL=app.css.map*/

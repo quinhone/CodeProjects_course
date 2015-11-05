@@ -8,6 +8,7 @@
 
 namespace CodeProject\Services;
 
+use CodeProject\Repositories\ProjectRepositoryInterface;
 use CodeProject\Repositories\ProjectTaskRepositoryInterface;
 use CodeProject\Validators\ProjectTaskValidator;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -15,24 +16,32 @@ use Prettus\Validator\Exceptions\ValidatorException;
 class ProjectTaskService
 {
     /**
-     * @var ProjectRepositoryInterface
+     * @var ProjectTaskRepositoryInterface
      */
     protected $repository;
     /**
      * @var ProjectValidator
      */
     protected $validator;
+    /**
+     * @var ProjectRepositoryInterface
+     */
+    protected $projectRepository;
 
-    public function __construct(ProjectTaskRepositoryInterface $repository, ProjectTaskValidator $validator)
+    public function __construct(ProjectTaskRepositoryInterface $repository,
+                                ProjectTaskValidator $validator,
+                                ProjectRepositoryInterface $projectRepository)
     {
         $this->repository = $repository;
         $this->validator = $validator;
+        $this->projectRepository = $projectRepository;
     }
 
     public function create(array $data)
     {
         try{
             $this->validator->with($data)->passesOrFail();
+            $project = $this->projectRepository->skipPresenter()->find($data['project_id']);
             return $this->repository->create($data);
         }catch (ValidatorException $e)
         {
@@ -47,7 +56,7 @@ class ProjectTaskService
     {
         try{
             $this->validator->with($data)->passesOrFail();
-            return $this->repository->create($data, $id);
+            return $this->repository->update($data, $id);
         }catch (ValidatorException $e)
         {
             return [

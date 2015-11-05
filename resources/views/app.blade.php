@@ -47,14 +47,14 @@
 						<a href="/#/clients" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Clients <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="/#/clients">Clients</a></li>
-							<li><a href="/#/clients/new">Client New</a></li>
+							<li><a href="/#/client/new">Client New</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a href="/#/projects" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="/#/projects">Projects</a></li>
-							<li><a href="/#/projects/new">Project New</a></li>
+							<li><a href="/#/project/new">Project New</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -117,6 +117,15 @@
 		<script src="{{asset('build/js/controllers/project-note/projectNoteEdit.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-note/projectNoteRemove.js')}}"></script>
 
+		<script src="{{asset('build/js/controllers/project-task/projectTaskList.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-task/projectTaskShow.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-task/projectTaskNew.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-task/projectTaskEdit.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-task/projectTaskRemove.js')}}"></script>
+
+		<script src="{{asset('build/js/controllers/project-member/projectMemberList.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-member/projectMemberRemove.js')}}"></script>
+
 		<script src="{{asset('build/js/controllers/project-file/projectFileList.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-file/projectFileNew.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-file/projectFileEdit.js')}}"></script>
@@ -132,6 +141,8 @@
 		<script src="{{asset('build/js/services/client.js')}}"></script>
 		<script src="{{asset('build/js/services/project.js')}}"></script>
 		<script src="{{asset('build/js/services/projectNote.js')}}"></script>
+		<script src="{{asset('build/js/services/projectTask.js')}}"></script>
+		<script src="{{asset('build/js/services/projectMember.js')}}"></script>
 		<script src="{{asset('build/js/services/projectFile.js')}}"></script>
 		<script src="{{asset('build/js/services/user.js')}}"></script>
 		<script src="{{asset('build/js/services/url.js')}}"></script>
