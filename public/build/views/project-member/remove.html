@@ -4,13 +4,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Delete Project Task </div>
                 <div class="panel-body">
-                    <h3>Deseja realmente excluir essa Task?</h3>
+                    <h3>Deseja realmente excluir esse Membro?</h3>
                     <ul>
-                        <li><strong>Nome: </strong>{{projectTask.name}}</li>
-                        <li><strong>Start Date: </strong>{{projectTask.start_date}}</li>
-                        <li><strong>Due Date: </strong>{{projectTask.due_date}}</li>
+                        <li><strong>Nome: </strong>{{projectMember.user.data.name}}</li>
                     </ul>
-                        <div class="form-group">
+                    <div class="form-group">
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-success pull-right" ng-click="remove()">Delete</button>
                             </div>

@@ -63,7 +63,7 @@ class ProjectMemberController extends Controller
      */
     public function show($id, $idProjectMember)
     {
-        $this->repository->find($idProjectMember);
+        return $this->repository->find($idProjectMember);
     }
 
     /**

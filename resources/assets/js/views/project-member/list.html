@@ -27,14 +27,14 @@
                         <thead>
                         <tr>
                             <th width="80%">Name</th>
-                            <th width="20%">Actions</th>
+                            <th width="20%"></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="obj in projectMembers">
                             <td>{{obj.user.data.name}}</td>
-                            <td>
-                                <a ng-href="#/project/{{obj.project_id}}/member/{{obj.user.data.member_id}}/remove" class="btn btn-danger">Delete</a>
+                            <td align="right">
+                                <a ng-href="#/project/{{obj.project_id}}/member/{{obj.id}}/remove" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
                             </td>
                         </tr>
                         </tbody>

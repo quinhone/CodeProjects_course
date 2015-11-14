@@ -25,7 +25,7 @@
                             <th width="10%">Start Date</th>
                             <th width="10%">Due Date</th>
                             <th width="10%">Status</th>
-                            <th width="20%">Actions</th>
+                            <th width="20%"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -34,9 +34,9 @@
                             <td>{{obj.start_date | dateBr}}</td>
                             <td>{{obj.due_date | dateBr}}</td>
                             <td>{{obj.status}}</td>
-                            <td>
-                                <a ng-href="#/project/{{obj.project_id}}/task/{{obj.id}}/edit" class="btn btn-primary">Edit</a>
-                                <a ng-href="#/project/{{obj.project_id}}/task/{{obj.id}}/remove" class="btn btn-danger">Delete</a>
+                            <td align="right">
+                                <a ng-href="#/project/{{obj.project_id}}/task/{{obj.id}}/edit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
+                                <a ng-href="#/project/{{obj.project_id}}/task/{{obj.id}}/remove" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
                             </td>
                         </tr>
                         </tbody>

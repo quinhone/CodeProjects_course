@@ -44,21 +44,23 @@ class ProjectMemberService
         }
     }
 
-    public function delete($projectId, $userId)
+    public function delete($memberId)
     {
         try{
-            $member = $this->getProjectMember($projectId, $userId);
+            //$member = $this->getProjectMember($projectId, $userId);
 
-            if( $member['success'] ){
-                return ["success" => $this->repository->delete($projectId, $userId)];
-            }
 
-            return $member;
+            //if( $member['success'] ){
+
+                return $this->repository->delete($memberId);
+            //
+
+            //return $member;
 
         }catch (\Exception $e) {
             return [
                 'success' => false,
-                'message' => "Could not delete the Member {$userId}"
+                'message' => "Could not delete the Member {$memberId}"
             ];
         }
     }
@@ -66,7 +68,7 @@ class ProjectMemberService
     public function getProjectMember($projectId, $userId)
     {
         try{
-            return ["success" => $this->repository->findWhere(['user_id' => $userId, 'project_id' => $projectId])];
+            return ["success" => $this->repository->skipPresenter()->findWhere(['user_id' => $userId, 'project_id' => $projectId])];
         } catch(\Exception $e) {
             return ["success" => false, "message" => "Member ID: {$userId} not found"];
         }

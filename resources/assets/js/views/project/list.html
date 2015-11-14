@@ -22,10 +22,12 @@
                                 <td>{{obj.progress}}</td>
                                 <td>{{obj.status}}</td>
                                 <td>{{obj.due_date | dateBr}}</td>
-                                <td>
+                                <td align="right">
                                     <a ng-href="#/project/{{obj.id}}/files" class="btn btn-info" data-toggle="tooltip" title="Enviar Arquivo"><span class="glyphicon glyphicon-save-file"></span></a>
                                     <a ng-href="#/project/{{obj.id}}/edit" class="btn btn-primary" title="Editar Projeto"><span class="glyphicon glyphicon-edit"></span></a>
-                                    <a ng-href="#/project/{{obj.id}}/notes" class="btn btn-success" title="Adicionar Notas"><span class="glyphicon glyphicon-comment"></span></a>
+                                    <a ng-href="#/project/{{obj.id}}/notes" class="btn btn-primary" title="Adicionar Notas"><span class="glyphicon glyphicon-comment"></span></a>
+                                    <a ng-href="#/project/{{obj.id}}/tasks" class="btn btn-primary" title="Adicionar Task"><span class="glyphicon glyphicon-tasks"></span></a>
+                                    <a ng-href="#/project/{{obj.id}}/members" class="btn btn-primary" title="Adicionar Members"><span class="glyphicon glyphicon-user"></span></a>
                                     <a ng-href="#/project/{{obj.id}}/remove" class="btn btn-danger" title="Remover Projeto"><span class="glyphicon glyphicon-remove"></span></a>
                                 </td>
                             </tr>
