@@ -41,7 +41,7 @@ class ProjectTaskService
     {
         try{
             $this->validator->with($data)->passesOrFail();
-            $project = $this->projectRepository->skipPresenter()->find($data['project_id']);
+            //$project = $this->projectRepository->skipPresenter()->find($data['project_id']);
             return $this->repository->create($data);
         }catch (ValidatorException $e)
         {
