@@ -14,7 +14,7 @@ angular.module('app.services')
                     return appConfig.utils.transformRequest(obj);
                 }
             }
-            return data;
+            return appConfig.utils.transformRequest(data);
         };
 
         return $resource(appConfig.baseUrl + '/project/:id/task/:idTask', {

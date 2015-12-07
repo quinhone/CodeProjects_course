@@ -62,6 +62,7 @@ app.config(['$routeProvider', '$httpProvider',  'OAuthProvider', 'OAuthTokenProv
     $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
     $httpProvider.defaults.transformRequest = appConfigProvider.config.utils.transformRequest;
     $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
+    $httpProvider.interceptors.push('oauthFixInterceptor');
 
     $routeProvider
         .when('/login', {
@@ -197,7 +198,7 @@ app.config(['$routeProvider', '$httpProvider',  'OAuthProvider', 'OAuthTokenProv
         })
 }]);
 
-app.run(['$rootScope', '$location', '$window', 'OAuth', function($rootScope, $location, $window, OAuth) {
+app.run(['$rootScope', '$location', '$http', 'OAuth', function($rootScope, $location, $http, OAuth) {
 
     $rootScope.$on('$routeChangeStart', function(event, next, current){
         if(next.$$route.originalPath != '/login'){
@@ -207,19 +208,23 @@ app.run(['$rootScope', '$location', '$window', 'OAuth', function($rootScope, $lo
         }
     });
 
-    $rootScope.$on('oauth:error', function(event, rejection) {
+    $rootScope.$on('oauth:error', function(event, data) {
         // Ignore `invalid_grant` error - should be catched on `LoginController`.
-        if ('invalid_grant' === rejection.data.error) {
+        if ('invalid_grant' === data.rejection.data.error) {
             return;
         }
 
         // Refresh token when a `invalid_token` error occurs.
-        if ('invalid_token' === rejection.data.error) {
-            return OAuth.getRefreshToken();
+        if ('access_denied' === data.rejection.data.error) {
+            return OAuth.getRefreshToken().then(function(response){
+                return $http(data.rejection.config).then(function(response){
+                    return data.deferred.resolve(response);
+                })
+            });
         }
 
         // Redirect to `/login` with the `error_reason`.
-        return $window.location.href = '/login?error_reason=' + rejection.data.error;
+        return $location.path('login');
     });
 
 }]);
