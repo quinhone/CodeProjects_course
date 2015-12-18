@@ -21,8 +21,6 @@ Route::post('oauth/access_token', function() {
 
 Route::group(['middleware' => 'oauth'], function() {
 
-    \Debugbar::disable();
-
     Route::resource('client', 'ClientController', ['except' => ['create', 'edit']]);
 
     Route::resource('project', 'ProjectController', ['except' => ['create', 'edit']]);

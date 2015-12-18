@@ -92,11 +92,13 @@
 		<script src="{{asset('build/js/vendor/query-string.js')}}"></script>
 		<script src="{{asset('build/js/vendor/angular-oauth2.min.js')}}"></script>
 		<script src="{{asset('build/js/vendor/ng-file-upload.min.js')}}"></script>
+		<script src="{{asset('build/js/vendor/http-auth-interceptor.js')}}"></script>
 
 		<script src="{{asset('build/js/app.js')}}"></script>
 
 		<!-- CONTROLLERS !-->
 		<script src="{{asset('build/js/controllers/login.js')}}"></script>
+		<script src="{{asset('build/js/controllers/loginModal.js')}}"></script>
 		<script src="{{asset('build/js/controllers/home.js')}}"></script>
 
 		<script src="{{asset('build/js/controllers/client/clientList.js')}}"></script>
@@ -136,6 +138,7 @@
 
 		<!-- DIRECTVES !-->
 		<script src="{{asset('build/js/directives/projectFileDownload.js')}}"></script>
+		<script src="{{asset('build/js/directives/loginForm.js')}}"></script>
 
 		<!-- SERVICES !-->
 		<script src="{{asset('build/js/services/client.js')}}"></script>
