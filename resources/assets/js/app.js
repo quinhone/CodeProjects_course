@@ -1,4 +1,6 @@
-var app = angular.module('app', ['ngRoute', 'angular-oauth2', 'app.controllers', 'app.services', 'app.filters', 'app.directives', 'ui.bootstrap.typeahead', 'ui.bootstrap.datepicker', 'ui.bootstrap.tpls', 'ui.bootstrap.tooltip', 'ui.bootstrap.modal', 'ngFileUpload', 'http-auth-interceptor']);
+var app = angular.module('app', ['ngRoute', 'angular-oauth2', 'app.controllers', 'app.services', 'app.filters', 'app.directives', 'ui.bootstrap.typeahead',
+    'ui.bootstrap.datepicker', 'ui.bootstrap.tpls', 'ui.bootstrap.tooltip', 'ui.bootstrap.modal', 'ngFileUpload', 'http-auth-interceptor',
+    'angularUtils.directives.dirPagination', 'ui.bootstrap.dropdown']);
 
 angular.module('app.controllers', ['ngMessages', 'angular-oauth2']);
 angular.module('app.filters', []);
@@ -35,7 +37,7 @@ app.provider('appConfig', ['$httpParamSerializerProvider', function ($httpParamS
                 var headersGetter = headers();
                 if (headersGetter['content-type'] == 'application/json' || headersGetter['content-type'] == 'text/json') {
                     var dataJson = JSON.parse(data);
-                    if (dataJson.hasOwnProperty('data')) {
+                    if (dataJson.hasOwnProperty('data') && Object.keys(dataJson).length == 1 ) {
                         dataJson = dataJson.data;
                     }
                     return dataJson;

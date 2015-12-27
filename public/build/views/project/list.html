@@ -6,33 +6,43 @@
                 <div class="panel-body">
                     <table class="table">
                         <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Client</th>
-                                <th>Progress</th>
-                                <th>Status</th>
-                                <th>Due Date</th>
-                                <th></th>
-                            </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Client</th>
+                            <th>Progress</th>
+                            <th>Status</th>
+                            <th>Due Date</th>
+                            <th></th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="obj in projects">
-                                <td>{{obj.name}}</td>
-                                <td>{{obj.client.data.name}}</td>
-                                <td>{{obj.progress}}</td>
-                                <td>{{obj.status}}</td>
-                                <td>{{obj.due_date | dateBr}}</td>
-                                <td align="right">
-                                    <a ng-href="#/project/{{obj.id}}/files" class="btn btn-info" data-toggle="tooltip" title="Enviar Arquivo"><span class="glyphicon glyphicon-save-file"></span></a>
-                                    <a ng-href="#/project/{{obj.id}}/edit" class="btn btn-primary" title="Editar Projeto"><span class="glyphicon glyphicon-edit"></span></a>
-                                    <a ng-href="#/project/{{obj.id}}/notes" class="btn btn-primary" title="Adicionar Notas"><span class="glyphicon glyphicon-comment"></span></a>
-                                    <a ng-href="#/project/{{obj.id}}/tasks" class="btn btn-primary" title="Adicionar Task"><span class="glyphicon glyphicon-tasks"></span></a>
-                                    <a ng-href="#/project/{{obj.id}}/members" class="btn btn-primary" title="Adicionar Members"><span class="glyphicon glyphicon-user"></span></a>
-                                    <a ng-href="#/project/{{obj.id}}/remove" class="btn btn-danger" title="Remover Projeto"><span class="glyphicon glyphicon-remove"></span></a>
-                                </td>
-                            </tr>
+                        <tr dir-paginate="obj in projects | itemsPerPage: projectsPerPage" total-items="totalProjects"
+                            current-page="pagination.current">
+                            <td>{{obj.name}}</td>
+                            <td>{{obj.client.data.name}}</td>
+                            <td>{{obj.progress}}</td>
+                            <td>{{obj.status}}</td>
+                            <td>{{obj.due_date | dateBr}}</td>
+                            <td align="right">
+                                <a ng-href="#/project/{{obj.id}}/files" class="btn btn-info" data-toggle="tooltip"
+                                   title="Enviar Arquivo"><span class="glyphicon glyphicon-save-file"></span></a>
+                                <a ng-href="#/project/{{obj.id}}/edit" class="btn btn-primary"
+                                   title="Editar Projeto"><span class="glyphicon glyphicon-edit"></span></a>
+                                <a ng-href="#/project/{{obj.id}}/notes" class="btn btn-primary" title="Adicionar Notas"><span
+                                    class="glyphicon glyphicon-comment"></span></a>
+                                <a ng-href="#/project/{{obj.id}}/tasks" class="btn btn-primary"
+                                   title="Adicionar Task"><span class="glyphicon glyphicon-tasks"></span></a>
+                                <a ng-href="#/project/{{obj.id}}/members" class="btn btn-primary"
+                                   title="Adicionar Members"><span class="glyphicon glyphicon-user"></span></a>
+                                <a ng-href="#/project/{{obj.id}}/remove" class="btn btn-danger" title="Remover Projeto"><span
+                                    class="glyphicon glyphicon-remove"></span></a>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
+                    <div class="text-center">
+                        <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>
